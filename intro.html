@@ -482,8 +482,9 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Eventually we want to solve a system of 272 equations in 33 variables (one equation for each game, one variable for each team, and one additional variable for home-field advantage).
-$<span class="math notranslate nohighlight">\(
+<p>Eventually we want to solve a system of 272 equations in 33 variables (one equation for each game, one variable for each team, and one additional variable for home-field advantage).</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 272\text{ equations: }\left\{\begin{aligned}
    \text{\{Kansas City PR\}} - \text{\{Detroit PR\}} + \text{HFA} &amp;= 6.5\\
    \text{\{Atlanta PR\}} - \text{\{Carolina PR\}} + \text{HFA} &amp;= 3\\
@@ -491,7 +492,7 @@ $<span class="math notranslate nohighlight">\(
    \text{\{Cleveland PR\}} - \text{\{Cincinnati PR\}} + \text{HFA} &amp;= -1\\
    &amp;\cdots 
 \end{aligned}\right.
-\)</span>$</p>
+\end{split}\]</div>
 <p>Solving this system exactly is impossible (that’s why none of our sample equations above fit the data perfectly).  Instead, we use linear regression to find what values come the closest to solving it.  Closest in this context means we look at the errors between our predicted spreads (like 1.5, 2.8, 3.6 above) and the actual spreads (like 2.5, 3.5, 3 above).  In this case, these errors are -1, -0.7, 0.6.  When we say we want the values that come “closest” to solving the 272 equations, we mean we want the average of the squares of the errors to be as small as possible.  (That’s why this is sometimes also called “least squares regression”.  Another very reasonable choice is to demand that the average of the absolute values of the errors be as small as possible.  Demanding that the average of the errors be as small as possible is not a reasonable choice, because then positive and negative errors will “cancel out”, which we don’t want.)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
