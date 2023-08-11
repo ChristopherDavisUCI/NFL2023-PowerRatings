@@ -759,6 +759,10 @@ Name: count, dtype: int64
 </div>
 </div>
 <p>The hard work is done by the <code class="docutils literal notranslate"><span class="pre">fit</span></code> method of <code class="docutils literal notranslate"><span class="pre">reg</span></code>.  We specify that the input variables are from the <code class="docutils literal notranslate"><span class="pre">coefs</span></code> DataFrame, and the desired outputs are in the “spread_line” column in <code class="docutils literal notranslate"><span class="pre">df</span></code>.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>As mentioned in the <a class="reference internal" href="intro.html"><span class="doc std std-doc">Introduction notebook</span></a>, there are potentially issues with the best fit solution not being uniquely determined.  (In fact, when I tried to do this same thing in R, it would not let me.)  A way to get around this would be to delete one of the team columns from our <code class="docutils literal notranslate"><span class="pre">coefs</span></code> DataFrame, which has the effect of forcing that team’s power rating to be <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">coefs</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;spread_line&quot;</span><span class="p">])</span>

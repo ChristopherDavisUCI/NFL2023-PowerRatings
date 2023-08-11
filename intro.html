@@ -494,85 +494,10 @@ document.write(`
    &amp;\cdots 
 \end{aligned}\right.
 \end{split}\]</div>
-<p>Solving this system exactly is impossible (that’s why none of our sample equations above fit the data perfectly).  Instead, we use linear regression to find what values come the closest to solving it.  Closest in this context means we look at the errors between our predicted spreads (like 1.5, 2.8, 3.6 above) and the actual spreads (like 2.5, 3.5, 3 above).  In this case, these errors are -1, -0.7, 0.6.  When we say we want the values that come “closest” to solving the 272 equations, we mean we want the average of the squares of the errors to be as small as possible.  (That’s why this is sometimes also called “least squares regression”.  Another very reasonable choice is to demand that the average of the absolute values of the errors be as small as possible.  Demanding that the average of the errors be as small as possible is not a reasonable choice, because then positive and negative errors will “cancel out”, which we don’t want.)</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/spreads-2023-08-10.csv&quot;</span><span class="p">)</span>
-<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>home_team</th>
-      <th>away_team</th>
-      <th>spread_line</th>
-      <th>neutral</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>KC</td>
-      <td>DET</td>
-      <td>6.5</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>ATL</td>
-      <td>CAR</td>
-      <td>3.0</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>BAL</td>
-      <td>HOU</td>
-      <td>9.5</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>CLE</td>
-      <td>CIN</td>
-      <td>-1.0</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>IND</td>
-      <td>JAX</td>
-      <td>-3.5</td>
-      <td>False</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
+<p>Solving this system exactly is impossible (that’s why none of our sample equations above fit the data perfectly).  Instead, we use linear regression to find what values come the closest to solving it.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>“Closest” in this context means we look at the errors between our predicted spreads (like 1.5, 2.8, 3.6 above) and the actual spreads (like 2.5, 3.5, 3 above).  In this case, these errors are -1, -0.7, 0.6.  When we say we want the values that come “closest” to solving the 272 equations, we mean we want the average of the squares of the errors to be as small as possible.  (That’s why this is sometimes also called “least squares regression”.  Another very reasonable choice is to demand that the average of the absolute values of the errors be as small as possible.  Demanding that the average of the errors be as small as possible is not a reasonable choice, because then positive and negative errors will “cancel out”, which we don’t want.)</p>
 </div>
 </section>
 <section id="example-system">
@@ -762,7 +687,7 @@ document.write(`
     \end{array}
 \right)
 \end{split}\]</div>
-<p>We’ll first see how to get the 1s portion of this 4-by-3 matrix.  This is such a common procedure that pandas has its own function to do this for us.  (The Machine Learning library scikit-learn has something similar, the <code class="docutils literal notranslate"><span class="pre">OneHotEncoder</span></code> class.)</p>
+<p>We’ll first see how to get the 1s portion of this 4-by-3 matrix.  This is such a common procedure that pandas has its own function to do this for us, named <code class="docutils literal notranslate"><span class="pre">get_dummies</span></code>, as in “dummy variable”.  (The Machine Learning library scikit-learn that we’ll use below also has something similar, the <code class="docutils literal notranslate"><span class="pre">OneHotEncoder</span></code> class.)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df3</span><span class="p">[</span><span class="s2">&quot;home_team&quot;</span><span class="p">])</span>
@@ -1055,7 +980,7 @@ Name: neutral, dtype: bool
 </div>
 </div>
 </div>
-<p>And then to convert to integers.</p>
+<p>And then again to convert to integers:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">~</span><span class="n">df3</span><span class="p">[</span><span class="s2">&quot;neutral&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
@@ -1072,89 +997,12 @@ Name: neutral, dtype: int64
 </div>
 </div>
 </div>
-<p>Let’s add this as a new “HFA” column to our coefficient matrix.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coefs_pre</span><span class="p">[</span><span class="s2">&quot;HFA&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="o">~</span><span class="n">df3</span><span class="p">[</span><span class="s2">&quot;neutral&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coefs_pre</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>KC</th>
-      <th>LV</th>
-      <th>MIA</th>
-      <th>HFA</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>123</th>
-      <td>1</td>
-      <td>0</td>
-      <td>-1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>157</th>
-      <td>0</td>
-      <td>-1</td>
-      <td>1</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>176</th>
-      <td>-1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>237</th>
-      <td>1</td>
-      <td>-1</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<p>This is the matrix we wanted to produce all along, so we will assign it to the variable <code class="docutils literal notranslate"><span class="pre">coefs</span></code>.  (We’ll also call the <code class="docutils literal notranslate"><span class="pre">copy</span></code> method just to make a new version of the DataFrame.  Don’t worry about this, I don’t think it is relevant here.)</p>
+<p>Let’s define what will become the final version of our coefficient matrix and add this “HFA” column to it. “HFA” column to our coefficient matrix.   (We’ll also call the <code class="docutils literal notranslate"><span class="pre">copy</span></code> method to make a new version of the DataFrame.  Don’t worry about this, I don’t think it is relevant here, but it can prevent hard-to-solve errors and warnings in some situations.)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coefs</span> <span class="o">=</span> <span class="n">coefs_pre</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coefs</span>
+<span class="n">coefs</span><span class="p">[</span><span class="s2">&quot;HFA&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="o">~</span><span class="n">df3</span><span class="p">[</span><span class="s2">&quot;neutral&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">coefs</span>
 </pre></div>
 </div>
 </div>
@@ -1221,7 +1069,10 @@ Name: neutral, dtype: int64
 <h2>Performing linear regression<a class="headerlink" href="#performing-linear-regression" title="Permalink to this heading">#</a></h2>
 <p>This section will be much easier in terms of Python code than the previous section, even though the math that occurs in the background is much more sophisticated.  (Essentially the previous section was just book-keeping.)</p>
 <p>Here we will use linear regression (also called “least squares regression”) to find the “best” values for “KC”, “LV”, “MIA”, and “HFA”.  (Remember that we saw above that no solution would solve these four equations perfectly.)  In the <a class="reference internal" href="PowerRatings.html"><span class="doc std std-doc">Power Ratings notebook</span></a>, we will use all 272 games, rather than just the four games among these three teams.</p>
-<p><strong>Caution</strong>.  If you try to do this same thing in R instead of in Python, it will complain because the “best” solution is not uniquely determined.  (Think about it: if you add 3 to every team’s power rating, the projected spreads remain unchanged.)  One way to get around this would be to remove one of the team columns from the <code class="docutils literal notranslate"><span class="pre">coefs</span></code> DataFrame.  This has the effect of forcing that team’s power rating to be 0.  That is probably also a good thing to do here in Python, but we’re not bothering with that now.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>If you try to do this same thing in R instead of in Python, it will complain because the “best” solution is not uniquely determined.  (Think about it: if you add 3 to every team’s power rating, the projected spreads remain unchanged, so those power ratings are just as good.)  One way to get around this would be to remove one of the team columns from the <code class="docutils literal notranslate"><span class="pre">coefs</span></code> DataFrame.  This has the effect of forcing that team’s power rating to be 0.  That is probably also a good thing to do here in Python, but in my experience it seems like ignoring it does not cause any issues.  If you want to read more about this issue, you can look up “collinearity”.</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
@@ -1229,7 +1080,7 @@ Name: neutral, dtype: int64
 </div>
 </div>
 </div>
-<p>Here we create a <code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code> object and assign it to the variable name <code class="docutils literal notranslate"><span class="pre">reg</span></code>.  (This is an example of where Python follows <em>Object Oriented Programming</em> conventions.  This object <code class="docutils literal notranslate"><span class="pre">reg</span></code> will perform the linear regression, and will store the results.)  Typically in linear regression, in addition to values being found for the columns, there is also a constant term found (like the <span class="math notranslate nohighlight">\(b\)</span> value in the equation of a line, <span class="math notranslate nohighlight">\(y = mx + b\)</span>).  We don’t want to allow that in this case, so we specify <code class="docutils literal notranslate"><span class="pre">fit_intercept=False</span></code>.</p>
+<p>Here we create a <code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code> object and assign it to the variable name <code class="docutils literal notranslate"><span class="pre">reg</span></code>.  (This is an example of where Python follows <em>Object Oriented Programming</em> conventions.  This object <code class="docutils literal notranslate"><span class="pre">reg</span></code> will perform the linear regression, and will store the results.)  Typically in linear regression, in addition to a value being found for each of the columns, there is also a constant term found (like the <span class="math notranslate nohighlight">\(b\)</span> value in the equation of a line, <span class="math notranslate nohighlight">\(y = mx + b\)</span>).  We don’t want to allow that in this case, so we specify <code class="docutils literal notranslate"><span class="pre">fit_intercept=False</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">(</span><span class="n">fit_intercept</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -1237,7 +1088,7 @@ Name: neutral, dtype: int64
 </div>
 </div>
 </div>
-<p>Here we fit the <code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code> object <code class="docutils literal notranslate"><span class="pre">reg</span></code> to the data.  Recall that <code class="docutils literal notranslate"><span class="pre">coefs</span></code> does not include any of the spread numbers.  The four columns of <code class="docutils literal notranslate"><span class="pre">coefs</span></code> correspond to our four input variables (called “features” or “predictors”).  Our desired output is <code class="docutils literal notranslate"><span class="pre">df3[&quot;spread_line&quot;]</span></code> (called the “target”).</p>
+<p>Here we fit the <code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code> object <code class="docutils literal notranslate"><span class="pre">reg</span></code> to the data.  Recall that <code class="docutils literal notranslate"><span class="pre">coefs</span></code> does not include any of the spread numbers.  The four columns of <code class="docutils literal notranslate"><span class="pre">coefs</span></code> correspond to our four input variables (called “features” or “predictors”).  Our desired output is <code class="docutils literal notranslate"><span class="pre">df3[&quot;spread_line&quot;]</span></code> (called the “target”).  We pass <code class="docutils literal notranslate"><span class="pre">coefs</span></code> and <code class="docutils literal notranslate"><span class="pre">df3[&quot;spread_line&quot;]</span></code> as two arguments to the <code class="docutils literal notranslate"><span class="pre">fit</span></code> method of <code class="docutils literal notranslate"><span class="pre">reg</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">coefs</span><span class="p">,</span> <span class="n">df3</span><span class="p">[</span><span class="s2">&quot;spread_line&quot;</span><span class="p">])</span>
@@ -1245,7 +1096,7 @@ Name: neutral, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>#sk-container-id-3 {color: black;background-color: white;}#sk-container-id-3 pre{padding: 0;}#sk-container-id-3 div.sk-toggleable {background-color: white;}#sk-container-id-3 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-3 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-3 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-3 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-3 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-3 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-3 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-3 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-3 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-3 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-3 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-3 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-3 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-3 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-3 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-3 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-3 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-3 div.sk-item {position: relative;z-index: 1;}#sk-container-id-3 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-3 div.sk-item::before, #sk-container-id-3 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-3 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-3 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-3 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-3 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-3 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-3 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-3 div.sk-label-container {text-align: center;}#sk-container-id-3 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-3 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-3" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LinearRegression(fit_intercept=False)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox" checked><label for="sk-estimator-id-3" class="sk-toggleable__label sk-toggleable__label-arrow">LinearRegression</label><div class="sk-toggleable__content"><pre>LinearRegression(fit_intercept=False)</pre></div></div></div></div></div></div></div>
+<div class="output text_html"><style>#sk-container-id-1 {color: black;background-color: white;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LinearRegression(fit_intercept=False)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">LinearRegression</label><div class="sk-toggleable__content"><pre>LinearRegression(fit_intercept=False)</pre></div></div></div></div></div></div></div>
 </div>
 <p>At this point, it’s not clear that anything happened, but as a result of the above call of <code class="docutils literal notranslate"><span class="pre">fit</span></code>, the object <code class="docutils literal notranslate"><span class="pre">reg</span></code> now has a variable <code class="docutils literal notranslate"><span class="pre">coef_</span></code> attached to it, which contains the corresponding “best” values.</p>
 <div class="cell docutils container">
