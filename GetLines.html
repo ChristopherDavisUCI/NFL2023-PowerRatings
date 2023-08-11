@@ -325,7 +325,8 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="getting-point-spreads-from-nflverse-on-github">
 <h1>Getting point spreads from nflverse on GitHub<a class="headerlink" href="#getting-point-spreads-from-nflverse-on-github" title="Permalink to this heading">#</a></h1>
-<p>By far the easiest way I know to get point spread data is to use the following file from nflverse on GitHub: <a class="reference external" href="https://github.com/nflverse/nfldata/blob/master/data/games.csv">games.csv</a>.  We will read in this file directly from GitHub, but another option would be to download the file and read it in locally.</p>
+<p>This notebook shows how we got the look-ahead point spread values that were used in our power ratings calculation.</p>
+<p>By far the easiest way I know to get point spread data is to use the following file from nflverse on GitHub: <a class="reference external" href="https://github.com/nflverse/nfldata/blob/master/data/games.csv">games.csv</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># for working with tabular data</span>
@@ -334,6 +335,7 @@ document.write(`
 </div>
 </div>
 </div>
+<p>We will read in this file directly from GitHub, but another option would be to download the file and read it in locally.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># read directly from GitHub</span>
@@ -351,7 +353,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Here are four random rows from the DataFrame.</p>
+<p>Here are four random rows from the DataFrame.  This <code class="docutils literal notranslate"><span class="pre">sample</span></code> method is similar to the <code class="docutils literal notranslate"><span class="pre">head</span></code> method, but the <code class="docutils literal notranslate"><span class="pre">sample</span></code> method returns randomly selected rows rather than the first rows.</p>
 <div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_full</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
@@ -650,6 +652,7 @@ document.write(`
 </div>
 </div>
 </div>
+<p>Here we can see that the data contained in <code class="docutils literal notranslate"><span class="pre">df</span></code> is much more modest than what was contained in <code class="docutils literal notranslate"><span class="pre">df_full</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
@@ -714,7 +717,7 @@ document.write(`
 </table>
 </div></div></div>
 </div>
-<p>The “location” column might seem pointless, but it does contain some useful information.</p>
+<p>The “location” column might seem pointless, but it does contain some useful information.  The following is telling us that “Home” is the location for 267 of the rows, and “Neutral” is the location for the remaining 5 rows.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;location&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
@@ -730,7 +733,7 @@ Name: count, dtype: int64
 </div>
 </div>
 </div>
-<p>Here are the neutral games in the dataset.</p>
+<p>Here are the neutral games in the dataset.  This approach to getting sub-DataFrames using the syntax <code class="docutils literal notranslate"><span class="pre">df[???]</span></code>, where <code class="docutils literal notranslate"><span class="pre">???</span></code> is something with Boolean (<code class="docutils literal notranslate"><span class="pre">True</span></code>/<code class="docutils literal notranslate"><span class="pre">False</span></code>) values, is very convenient and is called “Boolean indexing”.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;location&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Neutral&quot;</span><span class="p">]</span>
@@ -802,7 +805,7 @@ Name: count, dtype: int64
 </table>
 </div></div></div>
 </div>
-<p>It’s more convenient to have this represented as a Boolean column (one with values <code class="docutils literal notranslate"><span class="pre">True</span></code> and <code class="docutils literal notranslate"><span class="pre">False</span></code>).</p>
+<p>It will be more convenient for us to have this information represented differently.  Here we create a new column in <code class="docutils literal notranslate"><span class="pre">df</span></code> named “neutral” which contains <code class="docutils literal notranslate"><span class="pre">True</span></code> if the location is “Neutral” and contains <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;neutral&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;location&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Neutral&quot;</span><span class="p">)</span>
@@ -810,7 +813,7 @@ Name: count, dtype: int64
 </div>
 </div>
 </div>
-<p>Here is an example of how the newly added column looks.  (The high numbers refer to the row numbers in the original full DataFrame.  We won’t use them for anything.  If you instead wanted numbers from 0 to 271, you could use <code class="docutils literal notranslate"><span class="pre">df.reset_index(drop=True)</span></code>.  We won’t bother, because when we save the resulting DataFrame, we will drop the index anyway.)</p>
+<p>Here is an example of how the newly added column looks.  (The high numbers like <code class="docutils literal notranslate"><span class="pre">6468</span></code> on the left-hand side refer to the row numbers in the original full DataFrame.  We won’t use them for anything.  If you instead wanted numbers from 0 to 271, you could use <code class="docutils literal notranslate"><span class="pre">df.reset_index(drop=True)</span></code>.  We won’t bother, because when we save the resulting DataFrame, we will drop the index anyway.)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">6468</span><span class="p">:</span><span class="mi">6472</span><span class="p">]</span>
@@ -888,7 +891,7 @@ Name: count, dtype: int64
 </table>
 </div></div></div>
 </div>
-<p>Let’s get rid of the old location column.  (The <code class="docutils literal notranslate"><span class="pre">axis=1</span></code> term tells pandas that we want to drop a column, rather than dropping a row, which would be <code class="docutils literal notranslate"><span class="pre">axis=0</span></code>.)</p>
+<p>Let’s get rid of the old “location” column.  (The <code class="docutils literal notranslate"><span class="pre">axis=1</span></code> term tells pandas that we want to drop a column, rather than dropping a row, which would be <code class="docutils literal notranslate"><span class="pre">axis=0</span></code>.)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_new</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;location&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
