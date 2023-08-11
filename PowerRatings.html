@@ -1,0 +1,1323 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>NFL power ratings calculation &#8212; Market Power Ratings</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'PowerRatings';</script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Getting point spreads from nflverse on GitHub" href="GetLines.html" />
+    <link rel="prev" title="Market Power Ratings" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/pr-sorted.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/pr-sorted.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Market Power Ratings
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">NFL power ratings calculation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GetLines.html">Getting point spreads from nflverse on GitHub</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/ChristopherDavisUCI/Math173A-Notebooks/tree/gh-pages" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/PowerRatings.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>NFL power ratings calculation</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-272-equations-in-33-variables">Setting up 272 equations in 33 variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-closest-solution-to-these-equations">Finding the closest solution to these equations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-power-ratings">Visualizing the power ratings</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="nfl-power-ratings-calculation">
+<h1>NFL power ratings calculation<a class="headerlink" href="#nfl-power-ratings-calculation" title="Permalink to this heading">#</a></h1>
+<p>We read in the file that was created in the <a class="reference internal" href="GetLines.html"><span class="doc std std-doc">GetLines notebook</span></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">max_columns</span> <span class="o">=</span> <span class="mi">33</span> <span class="c1"># Display all teams and HFA</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here is how the first few rows look.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/spreads-2023-08-10.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>home_team</th>
+      <th>away_team</th>
+      <th>spread_line</th>
+      <th>neutral</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>KC</td>
+      <td>DET</td>
+      <td>6.5</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>ATL</td>
+      <td>CAR</td>
+      <td>3.0</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>BAL</td>
+      <td>HOU</td>
+      <td>9.5</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CLE</td>
+      <td>CIN</td>
+      <td>-1.0</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>IND</td>
+      <td>JAX</td>
+      <td>-3.5</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="setting-up-272-equations-in-33-variables">
+<h2>Setting up 272 equations in 33 variables<a class="headerlink" href="#setting-up-272-equations-in-33-variables" title="Permalink to this heading">#</a></h2>
+<p>This computation should look familiar from the <a class="reference internal" href="intro.html"><span class="doc std std-doc">Introduction notebook</span></a>, where we were using only four games.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">home_dummies</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;home_team&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;int&quot;</span><span class="p">)</span>
+<span class="n">away_dummies</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;away_team&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;int&quot;</span><span class="p">)</span>
+<span class="n">coefs</span> <span class="o">=</span> <span class="n">home_dummies</span> <span class="o">-</span> <span class="n">away_dummies</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice how most of these entries are 0 (this is a “sparse” matrix, although I don’t think we ever take advantage of that fact), with a <code class="docutils literal notranslate"><span class="pre">1</span></code> corresponding to the home teams and a <code class="docutils literal notranslate"><span class="pre">-1</span></code> corresponding to the away teams.  (We haven’t added the home-field advantage column yet.)  For example, in the top row, we have a <code class="docutils literal notranslate"><span class="pre">1</span></code> in the “KC” column and a <code class="docutils literal notranslate"><span class="pre">-1</span></code> in the “DET” column.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coefs</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ARI</th>
+      <th>ATL</th>
+      <th>BAL</th>
+      <th>BUF</th>
+      <th>CAR</th>
+      <th>CHI</th>
+      <th>CIN</th>
+      <th>CLE</th>
+      <th>DAL</th>
+      <th>DEN</th>
+      <th>DET</th>
+      <th>GB</th>
+      <th>HOU</th>
+      <th>IND</th>
+      <th>JAX</th>
+      <th>KC</th>
+      <th>LA</th>
+      <th>LAC</th>
+      <th>LV</th>
+      <th>MIA</th>
+      <th>MIN</th>
+      <th>NE</th>
+      <th>NO</th>
+      <th>NYG</th>
+      <th>NYJ</th>
+      <th>PHI</th>
+      <th>PIT</th>
+      <th>SEA</th>
+      <th>SF</th>
+      <th>TB</th>
+      <th>TEN</th>
+      <th>WAS</th>
+      <th>HFA</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>-1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Again, as in the <a class="reference internal" href="intro.html"><span class="doc std std-doc">Introduction notebook</span></a>, we want a home-field advantage factor for almost all the rows, with the only exceptions being the rows corresponding to the 5 games being played at a neutral location.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coefs</span><span class="p">[</span><span class="s2">&quot;HFA&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="o">~</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;neutral&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here are some reality checks.</p>
+<ul class="simple">
+<li><p>There are 272 games in the regular season, and 32 teams (plus one column for home-field advantage).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coefs</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(272, 33)
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>NFC teams have 8 home games and 9 road games.  This corresponds to the “ARI” column containing 8 values of <code class="docutils literal notranslate"><span class="pre">1</span></code>, containing 9 values of <code class="docutils literal notranslate"><span class="pre">-1</span></code>, and many values of <code class="docutils literal notranslate"><span class="pre">0</span></code>.  (There is a <code class="docutils literal notranslate"><span class="pre">0</span></code> for each game that does not involve Arizona.)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coefs</span><span class="p">[</span><span class="s2">&quot;ARI&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ARI
+ 0    255
+-1      9
+ 1      8
+Name: count, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Five games are being played at neutral locations.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coefs</span><span class="p">[</span><span class="s2">&quot;HFA&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>HFA
+1    267
+0      5
+Name: count, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="finding-the-closest-solution-to-these-equations">
+<h2>Finding the closest solution to these equations<a class="headerlink" href="#finding-the-closest-solution-to-these-equations" title="Permalink to this heading">#</a></h2>
+<p>Again, we follow the method used in the <a class="reference internal" href="intro.html"><span class="doc std std-doc">Introduction notebook</span></a> to find the “best” solutions (in terms of Mean Squared Error) to the given 272 equations.  The main tool we use is the <code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code> class defined by scikit-learn.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we create an instance (“instantiate”) a <code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code> object.  We specify <code class="docutils literal notranslate"><span class="pre">fit_intercept=False</span></code>, because we don’t want to allow an additive constant (what would that mean in the context of power ratings anyway?).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">(</span><span class="n">fit_intercept</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The hard work is done by the <code class="docutils literal notranslate"><span class="pre">fit</span></code> method of <code class="docutils literal notranslate"><span class="pre">reg</span></code>.  We specify that the input variables are from the <code class="docutils literal notranslate"><span class="pre">coefs</span></code> DataFrame, and the desired outputs are in the “spread_line” column in <code class="docutils literal notranslate"><span class="pre">df</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">coefs</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;spread_line&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>#sk-container-id-2 {color: black;background-color: white;}#sk-container-id-2 pre{padding: 0;}#sk-container-id-2 div.sk-toggleable {background-color: white;}#sk-container-id-2 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-2 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-2 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-2 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-2 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-2 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-2 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-2 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-2 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-2 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-2 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-2 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-2 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-2 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-2 div.sk-item {position: relative;z-index: 1;}#sk-container-id-2 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-2 div.sk-item::before, #sk-container-id-2 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-2 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-2 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-2 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-2 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-2 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-2 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-2 div.sk-label-container {text-align: center;}#sk-container-id-2 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-2 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-2" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LinearRegression(fit_intercept=False)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" checked><label for="sk-estimator-id-2" class="sk-toggleable__label sk-toggleable__label-arrow">LinearRegression</label><div class="sk-toggleable__content"><pre>LinearRegression(fit_intercept=False)</pre></div></div></div></div></div></div></div>
+</div>
+<p>As in the <a class="reference internal" href="intro.html"><span class="doc std std-doc">Introduction notebook</span></a>, the resulting values are stored in the newly defined <code class="docutils literal notranslate"><span class="pre">coef_</span></code> attribute of <code class="docutils literal notranslate"><span class="pre">reg</span></code>.  Putting these together in a pandas Series is a convenient way to include both the numerical values as well as the corresponding column names like “HFA” and “KC”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ser</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">reg</span><span class="o">.</span><span class="n">coef_</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">coefs</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here is how the pandas Series <code class="docutils literal notranslate"><span class="pre">ser</span></code> looks.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ser</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ARI   -5.515579
+ATL   -2.205334
+BAL    2.118708
+BUF    4.444309
+CAR   -2.865624
+CHI   -1.913665
+CIN    3.594643
+CLE    0.658812
+DAL    2.862485
+DEN    0.551433
+DET    0.972427
+GB    -1.632132
+HOU   -4.681461
+IND   -4.112030
+JAX    0.955583
+KC     5.732833
+LA    -2.751637
+LAC    2.296995
+LV    -1.598324
+MIA    2.473332
+MIN    0.122250
+NE    -0.428057
+NO    -0.541405
+NYG   -0.725707
+NYJ    2.380826
+PHI    4.488439
+PIT    0.070543
+SEA    0.598628
+SF     3.343375
+TB    -4.058167
+TEN   -2.737334
+WAS   -1.899165
+HFA    1.486125
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualizing-the-power-ratings">
+<h2>Visualizing the power ratings<a class="headerlink" href="#visualizing-the-power-ratings" title="Permalink to this heading">#</a></h2>
+<p>Here is a quick example of using the Python library Altair to visualize these power ratings.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">altair</span> <span class="k">as</span> <span class="nn">alt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we turn the pandas Series <code class="docutils literal notranslate"><span class="pre">ser</span></code> into a two-column DataFrame, with one column containing the team and the other column containing the power rating “PR”.  We’re not adding any new data here; we’re just putting the data into the pandas DataFrame format that Altair expects.  We do remove the “HFA” value, since visualizing it next to the team power ratings seems a little strange.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_pr</span> <span class="o">=</span> <span class="n">ser</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;HFA&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">({</span><span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="s2">&quot;Team&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="s2">&quot;PR&quot;</span><span class="p">},</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_pr</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Team</th>
+      <th>PR</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>ARI</td>
+      <td>-5.515579</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>ATL</td>
+      <td>-2.205334</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>BAL</td>
+      <td>2.118708</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>BUF</td>
+      <td>4.444309</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CAR</td>
+      <td>-2.865624</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>CHI</td>
+      <td>-1.913665</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>CIN</td>
+      <td>3.594643</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>CLE</td>
+      <td>0.658812</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>DAL</td>
+      <td>2.862485</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>DEN</td>
+      <td>0.551433</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>DET</td>
+      <td>0.972427</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>GB</td>
+      <td>-1.632132</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>HOU</td>
+      <td>-4.681461</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>IND</td>
+      <td>-4.112030</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>JAX</td>
+      <td>0.955583</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>KC</td>
+      <td>5.732833</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>LA</td>
+      <td>-2.751637</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>LAC</td>
+      <td>2.296995</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>LV</td>
+      <td>-1.598324</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>MIA</td>
+      <td>2.473332</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>MIN</td>
+      <td>0.122250</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>NE</td>
+      <td>-0.428057</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>NO</td>
+      <td>-0.541405</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>NYG</td>
+      <td>-0.725707</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>NYJ</td>
+      <td>2.380826</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>PHI</td>
+      <td>4.488439</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>PIT</td>
+      <td>0.070543</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>SEA</td>
+      <td>0.598628</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>SF</td>
+      <td>3.343375</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>TB</td>
+      <td>-4.058167</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>TEN</td>
+      <td>-2.737334</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>WAS</td>
+      <td>-1.899165</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Here we make a bar chart of the data.  We tell Altair that the team name should go along the x-axis and the Power Rating value should determine the heights of the bars.  The only customization we do is changing from the default color scheme to “tealblues”.  (See <a class="reference external" href="https://vega.github.io/vega/docs/schemes/">here</a> for other color scheme options.)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">df_pr</span><span class="p">)</span><span class="o">.</span><span class="n">mark_bar</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;Team&quot;</span><span class="p">,</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;PR&quot;</span><span class="p">,</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Color</span><span class="p">(</span><span class="s2">&quot;PR&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">scheme</span><span class="o">=</span><span class="s2">&quot;tealblues&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<style>
+  #altair-viz-7b4a6c7cf42c45afab817bb9ad037b45.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-7b4a6c7cf42c45afab817bb9ad037b45.vega-embed details,
+  #altair-viz-7b4a6c7cf42c45afab817bb9ad037b45.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-7b4a6c7cf42c45afab817bb9ad037b45"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-7b4a6c7cf42c45afab817bb9ad037b45") {
+      outputDiv = document.getElementById("altair-viz-7b4a6c7cf42c45afab817bb9ad037b45");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.8.0?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.8.0"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"name": "data-019015f98f9541a963bbf37ccc451030"}, "mark": {"type": "bar"}, "encoding": {"color": {"field": "PR", "scale": {"scheme": "tealblues"}, "type": "quantitative"}, "x": {"field": "Team", "type": "nominal"}, "y": {"field": "PR", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v5.8.0.json", "datasets": {"data-019015f98f9541a963bbf37ccc451030": [{"Team": "ARI", "PR": -5.515579122154293}, {"Team": "ATL", "PR": -2.205333648612865}, {"Team": "BAL", "PR": 2.1187084899022883}, {"Team": "BUF", "PR": 4.44430889722658}, {"Team": "CAR", "PR": -2.865623730795367}, {"Team": "CHI", "PR": -1.9136653389433924}, {"Team": "CIN", "PR": 3.5946434139233694}, {"Team": "CLE", "PR": 0.6588119392798714}, {"Team": "DAL", "PR": 2.8624854496639442}, {"Team": "DEN", "PR": 0.5514328111784748}, {"Team": "DET", "PR": 0.9724269795870105}, {"Team": "GB", "PR": -1.6321321260268673}, {"Team": "HOU", "PR": -4.681460584225195}, {"Team": "IND", "PR": -4.112030260890483}, {"Team": "JAX", "PR": 0.9555834558868168}, {"Team": "KC", "PR": 5.732833080617604}, {"Team": "LA", "PR": -2.7516374354432287}, {"Team": "LAC", "PR": 2.296994578308505}, {"Team": "LV", "PR": -1.598324047661651}, {"Team": "MIA", "PR": 2.473332057431676}, {"Team": "MIN", "PR": 0.12224991342756998}, {"Team": "NE", "PR": -0.4280570032452608}, {"Team": "NO", "PR": -0.5414051373540008}, {"Team": "NYG", "PR": -0.7257071365540871}, {"Team": "NYJ", "PR": 2.3808264008102538}, {"Team": "PHI", "PR": 4.488439036770839}, {"Team": "PIT", "PR": 0.07054314717570793}, {"Team": "SEA", "PR": 0.5986276422757708}, {"Team": "SF", "PR": 3.3433748741184446}, {"Team": "TB", "PR": -4.058167011914081}, {"Team": "TEN", "PR": -2.737334296402166}, {"Team": "WAS", "PR": -1.8991652873612042}]}}, {"mode": "vega-lite"});
+</script></div></div>
+</div>
+<p>Here is one more example.  We we sort the bars from biggest power rating to smallest.  We also add a tooltip, so that if you hover your mouse over one of the bars, it will indicate the team and the power rating.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">df_pr</span><span class="p">)</span><span class="o">.</span><span class="n">mark_bar</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s2">&quot;Team&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="s2">&quot;-y&quot;</span><span class="p">),</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;PR&quot;</span><span class="p">,</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Color</span><span class="p">(</span><span class="s2">&quot;PR&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">scheme</span><span class="o">=</span><span class="s2">&quot;tealblues&quot;</span><span class="p">),</span>
+    <span class="n">tooltip</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Team&quot;</span><span class="p">,</span> <span class="s2">&quot;PR&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<style>
+  #altair-viz-9a332edc78ac4a669f0af5d1ad299b2c.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-9a332edc78ac4a669f0af5d1ad299b2c.vega-embed details,
+  #altair-viz-9a332edc78ac4a669f0af5d1ad299b2c.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-9a332edc78ac4a669f0af5d1ad299b2c"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-9a332edc78ac4a669f0af5d1ad299b2c") {
+      outputDiv = document.getElementById("altair-viz-9a332edc78ac4a669f0af5d1ad299b2c");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.8.0?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.8.0"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"name": "data-019015f98f9541a963bbf37ccc451030"}, "mark": {"type": "bar"}, "encoding": {"color": {"field": "PR", "scale": {"scheme": "tealblues"}, "type": "quantitative"}, "tooltip": [{"field": "Team", "type": "nominal"}, {"field": "PR", "type": "quantitative"}], "x": {"field": "Team", "sort": "-y", "type": "nominal"}, "y": {"field": "PR", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v5.8.0.json", "datasets": {"data-019015f98f9541a963bbf37ccc451030": [{"Team": "ARI", "PR": -5.515579122154293}, {"Team": "ATL", "PR": -2.205333648612865}, {"Team": "BAL", "PR": 2.1187084899022883}, {"Team": "BUF", "PR": 4.44430889722658}, {"Team": "CAR", "PR": -2.865623730795367}, {"Team": "CHI", "PR": -1.9136653389433924}, {"Team": "CIN", "PR": 3.5946434139233694}, {"Team": "CLE", "PR": 0.6588119392798714}, {"Team": "DAL", "PR": 2.8624854496639442}, {"Team": "DEN", "PR": 0.5514328111784748}, {"Team": "DET", "PR": 0.9724269795870105}, {"Team": "GB", "PR": -1.6321321260268673}, {"Team": "HOU", "PR": -4.681460584225195}, {"Team": "IND", "PR": -4.112030260890483}, {"Team": "JAX", "PR": 0.9555834558868168}, {"Team": "KC", "PR": 5.732833080617604}, {"Team": "LA", "PR": -2.7516374354432287}, {"Team": "LAC", "PR": 2.296994578308505}, {"Team": "LV", "PR": -1.598324047661651}, {"Team": "MIA", "PR": 2.473332057431676}, {"Team": "MIN", "PR": 0.12224991342756998}, {"Team": "NE", "PR": -0.4280570032452608}, {"Team": "NO", "PR": -0.5414051373540008}, {"Team": "NYG", "PR": -0.7257071365540871}, {"Team": "NYJ", "PR": 2.3808264008102538}, {"Team": "PHI", "PR": 4.488439036770839}, {"Team": "PIT", "PR": 0.07054314717570793}, {"Team": "SEA", "PR": 0.5986276422757708}, {"Team": "SF", "PR": 3.3433748741184446}, {"Team": "TB", "PR": -4.058167011914081}, {"Team": "TEN", "PR": -2.737334296402166}, {"Team": "WAS", "PR": -1.8991652873612042}]}}, {"mode": "vega-lite"});
+</script></div></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Market Power Ratings</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="GetLines.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Getting point spreads from nflverse on GitHub</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-272-equations-in-33-variables">Setting up 272 equations in 33 variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-closest-solution-to-these-equations">Finding the closest solution to these equations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-power-ratings">Visualizing the power ratings</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Christopher Davis
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

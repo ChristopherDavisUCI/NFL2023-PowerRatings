@@ -1,0 +1,1395 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Market Power Ratings &#8212; Market Power Ratings</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="NFL power ratings calculation" href="PowerRatings.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="#">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/pr-sorted.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/pr-sorted.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1 current active">
+                <a class="reference internal" href="#">
+                    Market Power Ratings
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="PowerRatings.html">NFL power ratings calculation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GetLines.html">Getting point spreads from nflverse on GitHub</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/ChristopherDavisUCI/Math173A-Notebooks/tree/gh-pages" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/intro.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Market Power Ratings</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-system">Example system</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-the-coefficient-matrix">Creating the coefficient matrix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performing-linear-regression">Performing linear regression</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="market-power-ratings">
+<h1>Market Power Ratings<a class="headerlink" href="#market-power-ratings" title="Permalink to this heading">#</a></h1>
+<p>If you want to jump straight to the computation, without seeing the explanations and background in this notebook, go directly to the <a class="reference internal" href="PowerRatings.html"><span class="doc std std-doc">Power Ratings notebook</span></a>.</p>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<p>How can we compute “Market Power Ratings” like the following using Python?  (“HFA” stands for home-field advantage.  Our computation will estimate this value along the values for the 32 teams.)</p>
+<p><img alt="Power ratings" src="_images/pr-num.png" /></p>
+<p>What do these numbers mean?  For example, when Buffalo plays at Philadelphia, our numbers suggest that the spread should be about <code class="docutils literal notranslate"><span class="pre">1.5</span></code>.  (The many 0s displayed below is realted to numerical precision issues/rounding errors.  They don’t have any deeper meaning.)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mf">4.488</span> <span class="o">-</span> <span class="mf">4.444</span> <span class="o">+</span> <span class="mf">1.486</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.5300000000000005
+</pre></div>
+</div>
+</div>
+</div>
+<p>The actual look-ahead spread for that game (as of our data source on August 10th 2023) is <code class="docutils literal notranslate"><span class="pre">2.5</span></code>.  Similarly, the actual spread for Buffalo at Kansas City is <code class="docutils literal notranslate"><span class="pre">3.5</span></code>, while our power ratings suggest it should be about <code class="docutils literal notranslate"><span class="pre">2.8</span></code>, and the actual value is <code class="docutils literal notranslate"><span class="pre">3.5</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mf">5.733</span> <span class="o">-</span> <span class="mf">4.444</span> <span class="o">+</span> <span class="mf">1.486</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.7749999999999995
+</pre></div>
+</div>
+</div>
+</div>
+<p>It might seem like the predicted spreads using the power ratings are always a little too low, but for example with Cincinnati at Kansas City, the predicted spread is higher than the current line of <code class="docutils literal notranslate"><span class="pre">3</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mf">5.733</span> <span class="o">-</span> <span class="mf">3.595</span> <span class="o">+</span> <span class="mf">1.486</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.6239999999999997
+</pre></div>
+</div>
+</div>
+</div>
+<p>It’s easy to go from power ratings to spreads, like what we did in the three examples above.  The goal of these notebooks is to show how to go in the opposite direction, from spreads to power ratings.  We call these “market power ratings”, because they are derived from the currently available spreads.</p>
+<p>I first heard about making this computation (in Excel) from the Deep Dive podcast, Episode 345, with Andy Molitor and Drew Dinsick. Here is a short nine second clip from that episode.  In the actual episode, they discuss this starting around 23:30 for about fifteen minutes.  The full video is at <a class="reference external" href="https://fb.watch/68iADIi-2K/">https://fb.watch/68iADIi-2K/</a></p>
+<p><video src="deepdive345.mp4" type="video/mp4" width="320" controls></video></p>
+<p>Let me show a little more explicitly what these equations look like.  First I’m going to import a dataset containing look ahead spreads for all 272 games of the season.  See the <a class="reference internal" href="GetLines.html"><span class="doc std std-doc">Getting point spreads notebook</span></a> to see how this dataset was made.  (Most of the work was done by <a class="reference external" href="https://github.com/nflverse">nflverse</a> on GitHub.)</p>
+<p>When working with spreadsheet-style data in Python, we will almost always be using the pandas library.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we import the current point-spread data (as of August 10th 2023).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/spreads-2023-08-10.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here are the first four rows of <code class="docutils literal notranslate"><span class="pre">df</span></code>.  (It is conventional to use <code class="docutils literal notranslate"><span class="pre">df</span></code> as the variable name, because this is a pandas DataFrame object.)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>home_team</th>
+      <th>away_team</th>
+      <th>spread_line</th>
+      <th>neutral</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>KC</td>
+      <td>DET</td>
+      <td>6.5</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>ATL</td>
+      <td>CAR</td>
+      <td>3.0</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>BAL</td>
+      <td>HOU</td>
+      <td>9.5</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CLE</td>
+      <td>CIN</td>
+      <td>-1.0</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>In total, there are 272 rows in this DataFrame (one for each regular season game).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(272, 4)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Eventually we want to solve a system of 272 equations in 33 variables (one equation for each game, one variable for each team, and one additional variable for home-field advantage).
+$<span class="math notranslate nohighlight">\(
+272\text{ equations: }\left\{\begin{aligned}
+   \text{\{Kansas City PR\}} - \text{\{Detroit PR\}} + \text{HFA} &amp;= 6.5\\
+   \text{\{Atlanta PR\}} - \text{\{Carolina PR\}} + \text{HFA} &amp;= 3\\
+   \text{\{Baltimore PR\}} - \text{\{Houston PR\}} + \text{HFA} &amp;= 9.5\\
+   \text{\{Cleveland PR\}} - \text{\{Cincinnati PR\}} + \text{HFA} &amp;= -1\\
+   &amp;\cdots 
+\end{aligned}\right.
+\)</span>$</p>
+<p>Solving this system exactly is impossible (that’s why none of our sample equations above fit the data perfectly).  Instead, we use linear regression to find what values come the closest to solving it.  Closest in this context means we look at the errors between our predicted spreads (like 1.5, 2.8, 3.6 above) and the actual spreads (like 2.5, 3.5, 3 above).  In this case, these errors are -1, -0.7, 0.6.  When we say we want the values that come “closest” to solving the 272 equations, we mean we want the average of the squares of the errors to be as small as possible.  (That’s why this is sometimes also called “least squares regression”.  Another very reasonable choice is to demand that the average of the absolute values of the errors be as small as possible.  Demanding that the average of the errors be as small as possible is not a reasonable choice, because then positive and negative errors will “cancel out”, which we don’t want.)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/spreads-2023-08-10.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>home_team</th>
+      <th>away_team</th>
+      <th>spread_line</th>
+      <th>neutral</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>KC</td>
+      <td>DET</td>
+      <td>6.5</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>ATL</td>
+      <td>CAR</td>
+      <td>3.0</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>BAL</td>
+      <td>HOU</td>
+      <td>9.5</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CLE</td>
+      <td>CIN</td>
+      <td>-1.0</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>IND</td>
+      <td>JAX</td>
+      <td>-3.5</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="example-system">
+<h2>Example system<a class="headerlink" href="#example-system" title="Permalink to this heading">#</a></h2>
+<p>Let’s focus on just the following three teams, Kansas City, Las Vegas, and Miami.  Part of the reason we’ve chosen these three teams is because Kansas City will play against Miami in Frankfurt, Germany, which is one of the five games on the schedule which is being played on a neutral field.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">teams</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;KC&quot;</span><span class="p">,</span> <span class="s2">&quot;LV&quot;</span><span class="p">,</span> <span class="s2">&quot;MIA&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If this is your first time seeing pandas, don’t worry about understanding the following syntax.  Here we are finding the rows from <code class="docutils literal notranslate"><span class="pre">df</span></code> for which both teams are in our length-3 list <code class="docutils literal notranslate"><span class="pre">teams</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df3</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[[</span><span class="s2">&quot;home_team&quot;</span><span class="p">,</span> <span class="s2">&quot;away_team&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">teams</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here are the four games being played among those three teams.  (The numbers on the left, <code class="docutils literal notranslate"><span class="pre">123</span></code>, <code class="docutils literal notranslate"><span class="pre">157</span></code>, etc, are called the <code class="docutils literal notranslate"><span class="pre">index</span></code> of the DataFrame.  They are left over from the original DataFrame <code class="docutils literal notranslate"><span class="pre">df</span></code>.)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>home_team</th>
+      <th>away_team</th>
+      <th>spread_line</th>
+      <th>neutral</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>123</th>
+      <td>KC</td>
+      <td>MIA</td>
+      <td>4.0</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>157</th>
+      <td>MIA</td>
+      <td>LV</td>
+      <td>5.5</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>176</th>
+      <td>LV</td>
+      <td>KC</td>
+      <td>-5.0</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>237</th>
+      <td>KC</td>
+      <td>LV</td>
+      <td>8.5</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Think of KC, MIA, LV, and HFA (home-field advantage) as being four variables.  The above four rows correspond to the following four equations.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{alignat*}{5}
+   KC &amp; &amp;  &amp; {}-{} &amp; MIA  &amp;  &amp;   &amp;{}={} &amp; 4 \\
+    &amp; {}-{} &amp; LV  &amp; {}+{} &amp; MIA &amp; {}+{} &amp;  HFA &amp;{}={} &amp; 5.5 \\
+   -KC &amp; {}+{} &amp; LV &amp;  &amp;    &amp; {}+{} &amp;  HFA &amp;{}={} &amp; -5 \\
+   KC &amp; {}-{} &amp; LV &amp;   &amp;  &amp; {}+{} &amp;  HFA &amp;{}={} &amp; 8.5 \\
+\end{alignat*}
+\end{split}\]</div>
+<p>Notice that there is no perfect solution to these equations.  For example, if we subtract the second equation from the fourth equation, we get <span class="math notranslate nohighlight">\(KC - MIA = 8.5 - 5.5 = 3\)</span>, which is incompatible with the first equation.</p>
+<p>If you’ve taken a course in linear algebra, we’re saying that the following augmented matrix corresponds to an inconsistent system of equations.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\left( 
+    \begin{array}{cccc|c}
+        1 &amp; 0 &amp; -1 &amp; 0 &amp; 4 \\
+        0 &amp; -1 &amp; 1 &amp; 1 &amp; 5.5 \\
+        -1 &amp; 1 &amp; 0 &amp; 1 &amp; -5 \\
+        1 &amp; -1 &amp; 0 &amp; 1 &amp; 8.5 
+    \end{array}
+\right)
+\end{split}\]</div>
+<p>Be sure you see how the first four columns of that matrix (the part to the left of the vertical line) correspond to our equations above.  We won’t be using any linear algebra, but we will need to be able to create those coefficient columns of 1s, -1s, and 0s, using Python.</p>
+</section>
+<section id="creating-the-coefficient-matrix">
+<h2>Creating the coefficient matrix<a class="headerlink" href="#creating-the-coefficient-matrix" title="Permalink to this heading">#</a></h2>
+<p>We continue to work with the 4-by-4 DataFrame <code class="docutils literal notranslate"><span class="pre">df3</span></code> from above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>home_team</th>
+      <th>away_team</th>
+      <th>spread_line</th>
+      <th>neutral</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>123</th>
+      <td>KC</td>
+      <td>MIA</td>
+      <td>4.0</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>157</th>
+      <td>MIA</td>
+      <td>LV</td>
+      <td>5.5</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>176</th>
+      <td>LV</td>
+      <td>KC</td>
+      <td>-5.0</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>237</th>
+      <td>KC</td>
+      <td>LV</td>
+      <td>8.5</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We will first see how to turn <code class="docutils literal notranslate"><span class="pre">df3</span></code> into the following matrix, where we think of the three columns as corresponding to KC, LV, and MIA, respectively (we’ll bring back the HFA column and the spreads later).</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\left( 
+    \begin{array}{cccc|c}
+        1 &amp; 0 &amp; -1 \\
+        0 &amp; -1 &amp; 1 \\
+        -1 &amp; 1 &amp; 0 \\
+        1 &amp; -1 &amp; 0  
+    \end{array}
+\right)
+\end{split}\]</div>
+<p>We’ll first see how to get the 1s portion of this 4-by-3 matrix.  This is such a common procedure that pandas has its own function to do this for us.  (The Machine Learning library scikit-learn has something similar, the <code class="docutils literal notranslate"><span class="pre">OneHotEncoder</span></code> class.)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df3</span><span class="p">[</span><span class="s2">&quot;home_team&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>KC</th>
+      <th>LV</th>
+      <th>MIA</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>123</th>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>157</th>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>176</th>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>237</th>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>This is esssentially already perfect if we view <code class="docutils literal notranslate"><span class="pre">True</span></code> as corresponding to <code class="docutils literal notranslate"><span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">False</span></code> as corresponding to <code class="docutils literal notranslate"><span class="pre">0</span></code> (as Python does), but we can also make it explicit by specifying that we want the resulting data type to be integers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df3</span><span class="p">[</span><span class="s2">&quot;home_team&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>KC</th>
+      <th>LV</th>
+      <th>MIA</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>123</th>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>157</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>176</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>237</th>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We can use the same procedure to get the <code class="docutils literal notranslate"><span class="pre">-1</span></code> entries… we just need to use the “away_team” column and then to negate all the entries.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df3</span><span class="p">[</span><span class="s2">&quot;away_team&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>KC</th>
+      <th>LV</th>
+      <th>MIA</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>123</th>
+      <td>0</td>
+      <td>0</td>
+      <td>-1</td>
+    </tr>
+    <tr>
+      <th>157</th>
+      <td>0</td>
+      <td>-1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>176</th>
+      <td>-1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>237</th>
+      <td>0</td>
+      <td>-1</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Here then is the 4-by-3 matrix we were trying to construct.  (I’ll call it <code class="docutils literal notranslate"><span class="pre">coefs_pre</span></code> instead of <code class="docutils literal notranslate"><span class="pre">coefs</span></code> because it doesn’t yet include the home-field advantage coefficients.)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coefs_pre</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df3</span><span class="p">[</span><span class="s2">&quot;home_team&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span> <span class="o">-</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df3</span><span class="p">[</span><span class="s2">&quot;away_team&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">coefs_pre</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>KC</th>
+      <th>LV</th>
+      <th>MIA</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>123</th>
+      <td>1</td>
+      <td>0</td>
+      <td>-1</td>
+    </tr>
+    <tr>
+      <th>157</th>
+      <td>0</td>
+      <td>-1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>176</th>
+      <td>-1</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>237</th>
+      <td>1</td>
+      <td>-1</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Now let’s add in the “HFA” column.  Most of these entries will be <code class="docutils literal notranslate"><span class="pre">1</span></code>, because most games are not being played at a neutral stadium, but for our DataFrame <code class="docutils literal notranslate"><span class="pre">df3</span></code>, the top entry should be <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+<p>Here is the column of <code class="docutils literal notranslate"><span class="pre">df3</span></code> containing the relevant information.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df3</span><span class="p">[</span><span class="s2">&quot;neutral&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>123     True
+157    False
+176    False
+237    False
+Name: neutral, dtype: bool
+</pre></div>
+</div>
+</div>
+</div>
+<p>Again, we can view these as integers instead of as Boolean values <code class="docutils literal notranslate"><span class="pre">True</span></code> and <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df3</span><span class="p">[</span><span class="s2">&quot;neutral&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>123    1
+157    0
+176    0
+237    0
+Name: neutral, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>That is essentially the reverse of what we want.  I think the most natural way to get the values we want is to negate the “neutral” column:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">~</span><span class="n">df3</span><span class="p">[</span><span class="s2">&quot;neutral&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>123    False
+157     True
+176     True
+237     True
+Name: neutral, dtype: bool
+</pre></div>
+</div>
+</div>
+</div>
+<p>And then to convert to integers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">~</span><span class="n">df3</span><span class="p">[</span><span class="s2">&quot;neutral&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>123    0
+157    1
+176    1
+237    1
+Name: neutral, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s add this as a new “HFA” column to our coefficient matrix.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coefs_pre</span><span class="p">[</span><span class="s2">&quot;HFA&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="o">~</span><span class="n">df3</span><span class="p">[</span><span class="s2">&quot;neutral&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coefs_pre</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>KC</th>
+      <th>LV</th>
+      <th>MIA</th>
+      <th>HFA</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>123</th>
+      <td>1</td>
+      <td>0</td>
+      <td>-1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>157</th>
+      <td>0</td>
+      <td>-1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>176</th>
+      <td>-1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>237</th>
+      <td>1</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>This is the matrix we wanted to produce all along, so we will assign it to the variable <code class="docutils literal notranslate"><span class="pre">coefs</span></code>.  (We’ll also call the <code class="docutils literal notranslate"><span class="pre">copy</span></code> method just to make a new version of the DataFrame.  Don’t worry about this, I don’t think it is relevant here.)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coefs</span> <span class="o">=</span> <span class="n">coefs_pre</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coefs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>KC</th>
+      <th>LV</th>
+      <th>MIA</th>
+      <th>HFA</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>123</th>
+      <td>1</td>
+      <td>0</td>
+      <td>-1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>157</th>
+      <td>0</td>
+      <td>-1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>176</th>
+      <td>-1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>237</th>
+      <td>1</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="performing-linear-regression">
+<h2>Performing linear regression<a class="headerlink" href="#performing-linear-regression" title="Permalink to this heading">#</a></h2>
+<p>This section will be much easier in terms of Python code than the previous section, even though the math that occurs in the background is much more sophisticated.  (Essentially the previous section was just book-keeping.)</p>
+<p>Here we will use linear regression (also called “least squares regression”) to find the “best” values for “KC”, “LV”, “MIA”, and “HFA”.  (Remember that we saw above that no solution would solve these four equations perfectly.)  In the <a class="reference internal" href="PowerRatings.html"><span class="doc std std-doc">Power Ratings notebook</span></a>, we will use all 272 games, rather than just the four games among these three teams.</p>
+<p><strong>Caution</strong>.  If you try to do this same thing in R instead of in Python, it will complain because the “best” solution is not uniquely determined.  (Think about it: if you add 3 to every team’s power rating, the projected spreads remain unchanged.)  One way to get around this would be to remove one of the team columns from the <code class="docutils literal notranslate"><span class="pre">coefs</span></code> DataFrame.  This has the effect of forcing that team’s power rating to be 0.  That is probably also a good thing to do here in Python, but we’re not bothering with that now.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we create a <code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code> object and assign it to the variable name <code class="docutils literal notranslate"><span class="pre">reg</span></code>.  (This is an example of where Python follows <em>Object Oriented Programming</em> conventions.  This object <code class="docutils literal notranslate"><span class="pre">reg</span></code> will perform the linear regression, and will store the results.)  Typically in linear regression, in addition to values being found for the columns, there is also a constant term found (like the <span class="math notranslate nohighlight">\(b\)</span> value in the equation of a line, <span class="math notranslate nohighlight">\(y = mx + b\)</span>).  We don’t want to allow that in this case, so we specify <code class="docutils literal notranslate"><span class="pre">fit_intercept=False</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">(</span><span class="n">fit_intercept</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we fit the <code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code> object <code class="docutils literal notranslate"><span class="pre">reg</span></code> to the data.  Recall that <code class="docutils literal notranslate"><span class="pre">coefs</span></code> does not include any of the spread numbers.  The four columns of <code class="docutils literal notranslate"><span class="pre">coefs</span></code> correspond to our four input variables (called “features” or “predictors”).  Our desired output is <code class="docutils literal notranslate"><span class="pre">df3[&quot;spread_line&quot;]</span></code> (called the “target”).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">coefs</span><span class="p">,</span> <span class="n">df3</span><span class="p">[</span><span class="s2">&quot;spread_line&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>#sk-container-id-3 {color: black;background-color: white;}#sk-container-id-3 pre{padding: 0;}#sk-container-id-3 div.sk-toggleable {background-color: white;}#sk-container-id-3 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-3 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-3 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-3 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-3 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-3 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-3 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-3 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-3 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-3 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-3 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-3 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-3 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-3 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-3 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-3 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-3 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-3 div.sk-item {position: relative;z-index: 1;}#sk-container-id-3 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-3 div.sk-item::before, #sk-container-id-3 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-3 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-3 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-3 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-3 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-3 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-3 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-3 div.sk-label-container {text-align: center;}#sk-container-id-3 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-3 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-3" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LinearRegression(fit_intercept=False)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox" checked><label for="sk-estimator-id-3" class="sk-toggleable__label sk-toggleable__label-arrow">LinearRegression</label><div class="sk-toggleable__content"><pre>LinearRegression(fit_intercept=False)</pre></div></div></div></div></div></div></div>
+</div>
+<p>At this point, it’s not clear that anything happened, but as a result of the above call of <code class="docutils literal notranslate"><span class="pre">fit</span></code>, the object <code class="docutils literal notranslate"><span class="pre">reg</span></code> now has a variable <code class="docutils literal notranslate"><span class="pre">coef_</span></code> attached to it, which contains the corresponding “best” values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span><span class="o">.</span><span class="n">coef_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 3.52777778, -3.38888889, -0.13888889,  1.91666667])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Do you see what these four numbers represent?  They are the chosen values corresponding to the following four variables (in the same order).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span><span class="o">.</span><span class="n">feature_names_in_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;KC&#39;, &#39;LV&#39;, &#39;MIA&#39;, &#39;HFA&#39;], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Of course we’d probably say that the Kansas City power rating of <code class="docutils literal notranslate"><span class="pre">3.53</span></code> is too low, but maybe the numbers look more realistic if we add say 1.5 to the “KC”, “LV”, and “MIA” values.  (As mentioned above, the computed “best” values are not unique.)  And anyway, I think these four values are pretty accurate, considering that we only used 4 out of 272 spreads to compute them.  In the <a class="reference internal" href="PowerRatings.html"><span class="doc std std-doc">Power Ratings notebook</span></a>, we will use all 272 games, and the resulting values will look more accurate.</p>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="right-next"
+       href="PowerRatings.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">NFL power ratings calculation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-system">Example system</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-the-coefficient-matrix">Creating the coefficient matrix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performing-linear-regression">Performing linear regression</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Christopher Davis
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
